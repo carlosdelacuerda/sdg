@@ -9,8 +9,19 @@ export class MoviesService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllMovies(): Promise<movie[]> {
+  getAll(): Promise<movie[]> {
     return this.httpClient.get<movie[]>('./assets/dataset/movies.json').toPromise();
    }
+
+  async getRange(init, finish) {
+    let movieAll = await this.getAll();
+    let movieReturn = new Array;
+    for (let step = init; step < finish; step++) {
+      if (movieAll.length >= step) {
+        movieReturn.push(movieAll[step]) 
+      }
+    }
+    return movieReturn;
+  }
 
 }
