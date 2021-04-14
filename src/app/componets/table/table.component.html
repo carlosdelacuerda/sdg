@@ -1,24 +1,33 @@
-<div class="container" infiniteScroll [infiniteScrollDistance]="2"  (scrolled)="onScroll()">
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Year</th>
-        <th>Director</th>
-        <th>Cast</th>
-        <th>Genre</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let movie of arrMovies; index as i">
-        <td>{{ movie.title }}</td>
-        <td>{{ movie.year }}</td>
-        <td>{{ movie.director }}</td>
-        <td>{{ movie.cast }}</td>
-        <td>{{ movie.genre }}</td>
-        <td>{{ movie.notes }}</td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container" infiniteScroll (scrolled)="onScroll()">
+  <button *ngIf="showGoUpButton" (click)="scrollTop()">GO UP</button>
+  <header>
+    <figure>
+      logo
+    </figure>
+    <div class="search">
+      <label>
+        Order by
+        <select (change)="onChange()">
+          <option value="Year">Year</option>
+          <option value="Title">Title</option>
+          <option value="Director">Director</option>
+          <option value="Genre">Genre</option>
+        </select>
+      </label>
+    </div>
+  </header>
+  <ul>
+    <li *ngFor="let movie of arrMovies">
+      <h1>{{ movie.title }}</h1>
+      <div>
+        <span>{{ movie.year }}. </span>
+        <span>{{ movie.director }}</span>
+      </div>
+      <span>{{ movie.genre }}</span>
+      <div class="more-info">
+        <span>{{ movie.cast }}</span>
+        <span>{{ movie.notes }}</span>
+      </div>
+    </li>
+  </ul>
 </div>

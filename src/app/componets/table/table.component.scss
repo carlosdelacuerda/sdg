@@ -1,0 +1,57 @@
+@import '../../../assets/scss/common.scss';
+
+header {
+    position: fixed;
+    background-color: $traslucid;
+    width: 100%;
+    height: $size*5;
+    display: flex;
+    backdrop-filter: blur(4px);
+    align-items: center;
+    .search {
+        margin-left: auto;
+    }
+}
+
+ul {
+    padding-top: $size*5;
+    color: $color2;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    }
+li {
+    width: 25%;
+    padding: $size*2;
+    overflow: hidden;
+    border: 1px solid $color3;
+    span {
+        color: $color3;
+        font-size: $size*1.5;
+    }
+    .more-info {
+        display: block;
+        width: 100%;
+    }
+    &:hover {
+        div {
+            display: block;
+        }
+    }
+}
+
+button {
+    position: fixed;
+    z-index: 1;
+    background-color: $traslucid;
+    box-shadow: 0 0 5px $color4;
+    vertical-align: middle;
+    color: $color2;
+    padding: $size*2;
+    border-radius: 100%;
+    bottom: $size*3;
+    right: $size*3;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}

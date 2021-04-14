@@ -7,6 +7,8 @@ import { movie } from '../interfaces/movie.interface';
 })
 export class MoviesService {
 
+  movieAll: movie[];
+
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Promise<movie[]> {
@@ -14,11 +16,25 @@ export class MoviesService {
    }
 
   async getRange(init, finish) {
-    let movieAll = await this.getAll();
+    this.movieAll = await this.getAll();
     let movieReturn = new Array;
-    for (let step = init; step < finish; step++) {
-      if (movieAll.length >= step) {
-        movieReturn.push(movieAll[step]) 
+    for (let show = init; show < finish; show++) {
+      if (this.movieAll.length >= show) {
+        movieReturn.push(this.movieAll[show]) 
+      }
+    }
+    return movieReturn;
+  }
+
+  async order (init, finish) {
+    alert();
+    this.movieAll = [];
+    this.movieAll = await this.getAll();
+    this.movieAll = this.movieAll.sort((a, b) => a.title.localeCompare(b.title));
+    let movieReturn = new Array;
+    for (let show = init; show < finish; show++) {
+      if (this.movieAll.length >= show) {
+        movieReturn.push(this.movieAll[show]) 
       }
     }
     return movieReturn;

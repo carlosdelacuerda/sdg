@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { movie } from 'src/app/interfaces/movie.interface';
 import { MoviesService } from 'src/app/services/movies.service'
 
@@ -9,23 +9,25 @@ import { MoviesService } from 'src/app/services/movies.service'
 })
 export class TableComponent implements OnInit {
 
-  linesToWrite: Array<any>;
-  finishPage = 100;
-  actualPage: number;
   arrMovies: movie[];
   start: number = 0;
-  finish: number = 20;
+  finish: number = 50;
+  showGoUpButton: boolean;
+  showScrollHeight:number;
+  hideScrollHeight:number;
  
   constructor(private MoviesService: MoviesService) {
-    this.actualPage = 1;
+    this.showGoUpButton = false;
+    this.showScrollHeight = 1200;
+    this.hideScrollHeight = 400;
+    this.addMovies();
   }
  
   ngOnInit() {
-    this.linesToWrite = new Array<any>();
-    this.add40lines();
+    
   }
  
-  add40lines() {
+  addMovies() {
     this.MoviesService.getRange(this.start, this.finish)
     .then(response => {
       this.arrMovies = response;
@@ -33,18 +35,41 @@ export class TableComponent implements OnInit {
     .catch(error => {
       console.log(error)
     })
-    
-    // const line = 'Another new line -- ';
-    // let lineCounter = this.linesToWrite.length;
-    // for (let i = 0; i < 40; i ++) {
-    //   this.linesToWrite.push(line + lineCounter);
-    //   lineCounter ++;
-    // }
   }
 
   onScroll() {
-    this.finish = this.finish+20;
-    this.add40lines();
+    this.finish = this.finish+12;
+    this.addMovies();
+  }
+
+  scrollTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (( window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop) > this.showScrollHeight) {
+      this.showGoUpButton = true;
+    } else if ( this.showGoUpButton &&
+      (window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop)
+      < this.hideScrollHeight) {
+      this.showGoUpButton = false;
+    }
+  }
+
+  onChange(){
+    this.MoviesService.order(this.start, this.finish)
+    .then(response => {
+      this.arrMovies = response;
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 
 }
