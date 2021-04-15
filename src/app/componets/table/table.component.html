@@ -9,6 +9,7 @@
       logo
     </figure>
     <div class="search">
+      <input type="text" class="forms-control" placeholder="Buscar.." [(ngModel)]="filterpost" name="filterpost"/>
       <label>
         Order by
         <select (change)="onChange()" [(ngModel)]="selectedOption">
@@ -21,7 +22,7 @@
 
   <!-- listado de peliculas -->
   <ul>
-    <li *ngFor="let movie of arrMovies">
+    <li *ngFor="let movie of arrMovies | filter: filterpost">
       <div class="canvas">
         <h1>{{ movie.title }}</h1>
         <div>
