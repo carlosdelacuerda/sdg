@@ -6,11 +6,13 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppComponent } from './app.component';
 import { TableComponent } from './componets/table/table.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

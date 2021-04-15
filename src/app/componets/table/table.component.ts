@@ -1,7 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { movie } from 'src/app/interfaces/movie.interface';
 import { MoviesService } from 'src/app/services/movies.service';
-import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -9,11 +8,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   styleUrls: ['./table.component.scss']
 })
 
-@Pipe({
-  name: 'filter'
-})
 
 export class TableComponent implements OnInit {
+
+  filterpost = '';
 
   arrMovies: movie[];
   start: number = 0;
@@ -24,16 +22,6 @@ export class TableComponent implements OnInit {
   myOrder: string;
   selectedOption: string;
   selectedOrder: string;
-
-  transform(value: any, arg: any): any {
-    const resultPosts = [];
-    for(const post of value){
-      if(post.titulo.indexOf(arg) > -1){
-         resultPosts.push(post);
-      };
-    };
-    return resultPosts;
-  }
  
   constructor(private MoviesService: MoviesService) {
     this.showGoUpButton = false;
@@ -42,6 +30,7 @@ export class TableComponent implements OnInit {
   }
  
   ngOnInit() {
+    
     this.addMovies();
   }
  
