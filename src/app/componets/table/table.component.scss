@@ -1,6 +1,7 @@
 @import '../../../assets/scss/common.scss';
 
 header {
+    z-index: 2;
     position: fixed;
     background-color: $traslucid;
     width: 100%;
@@ -8,6 +9,7 @@ header {
     display: flex;
     backdrop-filter: blur(4px);
     align-items: center;
+    border-bottom: 1px solid $color4;
     .search {
         margin-left: auto;
     }
@@ -23,10 +25,10 @@ ul {
     }
 li {
     width: 25%;
-    padding: $size*2;
     overflow: hidden;
-    border: 1px solid $color3;
+    height: $size*20;
     span {
+        margin-top: $size;
         color: $color3;
         font-size: $size*1.5;
     }
@@ -43,15 +45,49 @@ li {
 
 button {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     background-color: $traslucid;
     box-shadow: 0 0 5px $color4;
     vertical-align: middle;
     color: $color2;
     padding: $size*2;
     border-radius: 100%;
+    border: 1px solid $color2;
+    box-shadow: 0 0 5px rgba(0,0,0,.6);
     bottom: $size*3;
     right: $size*3;
     cursor: pointer;
     backdrop-filter: blur(4px);
 }
+.more-info span {
+    font-size: $size*1.1;
+}
+.canvas {
+    position: relative;
+    overflow: hidden;
+    padding: $size;
+    background-color: $color4;
+    width: 92%;
+    height: 92%;
+    top: 4%;
+    left: 4%;
+    border-radius: 8px;
+    transition: 300ms;
+    &:hover {
+        transition: 300ms;
+        height: 100%;
+        z-index: 1;
+        top:0;
+        overflow-y: auto;
+        .more-info {
+            display: block;
+        }
+    }
+}
+
+// responsive
+@media (max-width: 721px) {
+    li {
+        width: 100%;
+    }
+} 

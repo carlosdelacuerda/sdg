@@ -8,36 +8,34 @@ import { movie } from '../interfaces/movie.interface';
 export class MoviesService {
 
   movieAll: movie[];
+  movieReturn: movie[];
+  movie: movie;
 
   constructor(private httpClient: HttpClient) {}
 
+
+  // recupera todo el json
   getAll(): Promise<movie[]> {
     return this.httpClient.get<movie[]>('./assets/dataset/movies.json').toPromise();
    }
 
-  async getRange(init, finish) {
+  // genera un array con las películas que va mostrando
+  async getRange(init, finish, param) {
     this.movieAll = await this.getAll();
-    let movieReturn = new Array;
+    switch (param) {
+      case 'title':
+        this.movieAll = this.movieAll.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'year':
+        this.movieAll = this.movieAll.sort((a, b) => a.year - b.year);
+        break;
+    }
+    this.movieReturn = new Array;
     for (let show = init; show < finish; show++) {
       if (this.movieAll.length >= show) {
-        movieReturn.push(this.movieAll[show]) 
+        this.movieReturn.push(this.movieAll[show]) 
       }
     }
-    return movieReturn;
+    return this.movieReturn;
   }
-
-  async order (init, finish) {
-    alert();
-    this.movieAll = [];
-    this.movieAll = await this.getAll();
-    this.movieAll = this.movieAll.sort((a, b) => a.title.localeCompare(b.title));
-    let movieReturn = new Array;
-    for (let show = init; show < finish; show++) {
-      if (this.movieAll.length >= show) {
-        movieReturn.push(this.movieAll[show]) 
-      }
-    }
-    return movieReturn;
-  }
-
 }

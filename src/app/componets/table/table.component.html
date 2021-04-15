@@ -1,5 +1,9 @@
 <div class="container" infiniteScroll (scrolled)="onScroll()">
+
+  <!-- botón para ir al inicio de la página -->
   <button *ngIf="showGoUpButton" (click)="scrollTop()">GO UP</button>
+
+  <!-- cabecera -->
   <header>
     <figure>
       logo
@@ -7,26 +11,28 @@
     <div class="search">
       <label>
         Order by
-        <select (change)="onChange()">
-          <option value="Year">Year</option>
-          <option value="Title">Title</option>
-          <option value="Director">Director</option>
-          <option value="Genre">Genre</option>
+        <select (change)="onChange()" [(ngModel)]="selectedOption">
+          <option value="year">Year</option>
+          <option value="title">Title</option>
         </select>
       </label>
     </div>
   </header>
+
+  <!-- listado de peliculas -->
   <ul>
     <li *ngFor="let movie of arrMovies">
-      <h1>{{ movie.title }}</h1>
-      <div>
-        <span>{{ movie.year }}. </span>
-        <span>{{ movie.director }}</span>
-      </div>
-      <span>{{ movie.genre }}</span>
-      <div class="more-info">
-        <span>{{ movie.cast }}</span>
-        <span>{{ movie.notes }}</span>
+      <div class="canvas">
+        <h1>{{ movie.title }}</h1>
+        <div>
+          <span>{{ movie.year }}. </span>
+          <span>{{ movie.director }}</span>
+        </div>
+        <span>{{ movie.genre }}</span>
+        <div class="more-info">
+          <span>{{ movie.cast }}</span>
+          <span>{{ movie.notes }}</span>
+        </div>
       </div>
     </li>
   </ul>
