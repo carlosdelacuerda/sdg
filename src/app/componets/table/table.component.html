@@ -1,20 +1,22 @@
 <div class="container" infiniteScroll (scrolled)="onScroll()">
 
   <!-- botón para ir al inicio de la página -->
-  <button *ngIf="showGoUpButton" (click)="scrollTop()">GO UP</button>
+  <button *ngIf="showGoUpButton" (click)="scrollTop()">
+    <img src="../../../assets/images/arrow.svg" alt="arrow up">
+  </button>
 
   <!-- cabecera -->
   <header>
     <figure>
-      logo
+      <img src="../../../assets/images/logo.png" alt="logo">
     </figure>
     <div class="search">
-      <input type="text" class="forms-control" placeholder="Buscar.." [(ngModel)]="filterpost" name="filterpost"/>
+      <input type="text" class="forms-control" placeholder="Search.." [(ngModel)]="filterpost" name="filterpost"/>
       <label>
         Order by
         <select (change)="onChange()" [(ngModel)]="selectedOption">
+          <option selected value="title">Title</option>
           <option value="year">Year</option>
-          <option value="title">Title</option>
         </select>
       </label>
     </div>

@@ -25,7 +25,7 @@ export class TableComponent implements OnInit {
  
   constructor(private MoviesService: MoviesService) {
     this.showGoUpButton = false;
-    this.showScrollHeight = 1200;
+    this.showScrollHeight = 800;
     this.hideScrollHeight = 400;
   }
  

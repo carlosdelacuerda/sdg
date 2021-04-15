@@ -26,7 +26,7 @@ ul {
 li {
     width: 25%;
     overflow: hidden;
-    height: $size*20;
+    height: $size*15;
     span {
         margin-top: $size;
         color: $color3;
@@ -83,6 +83,27 @@ button {
             display: block;
         }
     }
+}
+figure img {
+    height: $size*3;
+}
+figure {
+    padding: $size;
+}
+button img {
+    height: $size*4;
+    transform: rotate(180deg);
+}
+input, select {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid $color3;
+}
+label {
+    font-size: $size*1.5;
+    color: $color3;
+    margin-left: $size*2;
+    margin-right: $size*2;
 }
 
 // responsive
